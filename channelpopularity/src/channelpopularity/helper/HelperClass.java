@@ -1,5 +1,9 @@
 package channelpopularity.helper;
+<<<<<<< HEAD
 import channelpopularity.state.*;
+=======
+import channelpopularity.state.StateI;
+>>>>>>> de1ecfa9de996db55a7dc2a70bfc31379a5a8128
 import channelpopularity.state.StateName;
 import channelpopularity.util.FileProcessor;
 import channelpopularity.util.Results;
@@ -25,7 +29,11 @@ public class HelperClass {
 		try
 		{
 			String line = fp.poll();
+<<<<<<< HEAD
 			String outputString = null;
+=======
+			
+>>>>>>> de1ecfa9de996db55a7dc2a70bfc31379a5a8128
 			List<StateName> stateNamesList = new ArrayList<StateName>();
 			List<String> videoList = new ArrayList<String>();
 			
@@ -36,16 +44,26 @@ public class HelperClass {
 			
 			SimpleStateFactoryI ssf = new SimpleStateFactory();
 			ChannelContext cc = new ChannelContext(ssf,stateNamesList);
+<<<<<<< HEAD
 			StateI CurState;
+=======
+			StateI getTempCurState;
+>>>>>>> de1ecfa9de996db55a7dc2a70bfc31379a5a8128
 			
 			while(null != line)
 			{
 				if(line.matches("^ADD_VIDEO::[a-zA-Z0-9]+$"))
 				{
+<<<<<<< HEAD
+=======
+					//System.out.println(" "+line);
+					
+>>>>>>> de1ecfa9de996db55a7dc2a70bfc31379a5a8128
 					videoName = line.split("::")[1];
 					videoList.add(videoName);	
 					videoCount++;
 					
+<<<<<<< HEAD
 					
 					if(cc.getCurState().toString().matches("^.*UnpopularState.*$"))
 					{
@@ -70,10 +88,14 @@ public class HelperClass {
 					
 					res.store(outputString);
 					res.store("\n");
+=======
+					//System.out.println("in ADD video "+cc.getCurState());
+>>>>>>> de1ecfa9de996db55a7dc2a70bfc31379a5a8128
 					
 				}
 				else if(line.matches("^REMOVE_VIDEO::[a-zA-Z0-9]+$"))
 				{
+<<<<<<< HEAD
 					//System.out.println("count before remove"+videoList.size());
 					//System.out.println(" "+line);
 					videoName = line.split("::")[1];
@@ -99,10 +121,14 @@ public class HelperClass {
 						UltraPopularStateClass UTC = new UltraPopularStateClass();
 						outputString = UTC.createOutputString(videoName);
 					}
+=======
+					System.out.println(" "+line);
+>>>>>>> de1ecfa9de996db55a7dc2a70bfc31379a5a8128
 				}
 				else if(line.matches("^METRICS__[a-zA-Z0-9]+::\\[VIEWS=[0-9]+,LIKES=-?[0-9]+,DISLIKES=-?[0-9]+\\]$"))
 				{
 					String temp=line.replaceAll("^.*__|::.*$","");
+<<<<<<< HEAD
 					int views=Integer.parseInt(line.replaceAll("^.*VIEWS=|,.*$",""));
 					int likes = Integer.parseInt(line.replaceAll("^.*,LIKES=|,.*$",""));
 					int dislikes = Integer.parseInt(line.replaceAll("^.*DISLIKES=|].*$",""));
@@ -145,6 +171,27 @@ public class HelperClass {
 					
 					
 					
+=======
+					
+					System.out.println("in metrics "+temp);
+					
+					/*
+					while(!videoList.isEmpty())
+					{
+						int i = 0;
+						if(temp.equals(videoList.get(i)) == true)
+						{
+							System.out.println("Video present");
+							break;
+						}
+						else
+						{
+							i++;
+						}
+			
+					}
+					*/
+>>>>>>> de1ecfa9de996db55a7dc2a70bfc31379a5a8128
 				}
 				else if(line.matches("^AD_REQUEST__[a-zA-Z0-9]+::LEN=[0-9]+$"))
 				{
