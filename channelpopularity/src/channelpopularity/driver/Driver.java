@@ -1,5 +1,9 @@
 package channelpopularity.driver;
 
+import channelpopularity.util.FileProcessor;
+import channelpopularity.util.Results;
+import channelpopularity.helper.HelperClass;
+
 /**
  * @author John Doe
  *
@@ -19,5 +23,10 @@ public class Driver {
 			System.exit(0);
 		}
 		System.out.println("Hello World! Lets get started with the assignment");
+		
+		FileProcessor fp = new FileProcessor(args[0]);
+		Results res = new Results(args[1]);
+		HelperClass hp = new HelperClass();
+		hp.InputParser(fp,res);
 	}
 }
