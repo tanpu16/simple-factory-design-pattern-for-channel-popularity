@@ -10,19 +10,19 @@ public class SimpleStateFactory implements SimpleStateFactoryI {
 		
 		if(stateIn == StateName.UNPOPULAR)
 		{
-			createState = new UnpopularClass();
+			createState = new UnpopularStateClass();
 		}
 		else if(stateIn == StateName.MILDLY_POPULAR)
 		{
-			createState = new MildlyPopularClass();
+			createState = new MildlyPopularStateClass();
 		}
 		else if(stateIn == StateName.HIGHLY_POPULAR)
 		{
-			createState = new HighlyPopularClass();
+			createState = new HighlyPopularStateClass();
 		}
 		else if(stateIn == StateName.ULTRA_POPULAR)
 		{
-			createState = new UltraPopularClass();
+			createState = new UltraPopularStateClass();
 		}	
 		//System.out.println("in create "+createState);
 		return createState;
