@@ -9,7 +9,7 @@ public abstract class AbstractState implements StateI {
 	public int CalculatePopularityScore(int views,int likes,int dislikes,int vCount)
 	{
 		//System.out.println("in AbstractState score before is "+popularityScore);
-		popularityScore = popularityScore + ((views + 2*(likes-dislikes))/vCount);
+		popularityScore = (views + 2*(likes-dislikes));
 		//System.out.println("in AbstractState score is "+popularityScore);
 		return popularityScore;
 	}

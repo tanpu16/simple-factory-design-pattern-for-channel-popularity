@@ -28,5 +28,7 @@ public class Driver {
 		Results res = new Results(args[1]);
 		HelperClass hp = new HelperClass();
 		hp.InputParser(fp,res);
+		res.writeToFile();
+		res.writeToStdout();
 	}
 }
