@@ -6,11 +6,9 @@ import channelpopularity.util.FileProcessor;
 import channelpopularity.util.Results;
 import channelpopularity.state.factory.*;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 
 import channelpopularity.context.ChannelContext;
 import channelpopularity.operation.Operation;
@@ -37,33 +35,20 @@ public class HelperClass {
 			stateNamesList.add(StateName.ULTRA_POPULAR);
 			
 			SimpleStateFactoryI ssf = new SimpleStateFactory();
+			
 			ChannelContext cc = new ChannelContext(ssf,stateNamesList);
 			StateI CurState = cc.getCurState();
+			
 			while(null != line)
 			{
 				if(line.matches("^ADD_VIDEO::[a-zA-Z0-9]+$"))
 				{
 					videoName = line.split("::")[1];
-					hmap.put(videoName,0);	
+					
+					//hmap.put(videoName,0);	
+					cc.addVideo(hmap, videoName, 0);
 					videoCount++;
 					int score = 0;
-					
-					if(cc.getCurState().toString().matches("^.*UnpopularState.*$"))
-					{
-						CurState = new UnpopularStateClass();
-					}
-					else if(cc.getCurState().toString().matches("^.*MildlyPopularState.*$"))
-					{
-						CurState = new MildlyPopularStateClass();
-					}
-					else if(cc.getCurState().toString().matches("^.*HighlyPopularState.*$"))
-					{
-						CurState = new HighlyPopularStateClass();
-					}
-					else if(cc.getCurState().toString().matches("^.*UltraPopularState.*$"))
-					{
-						CurState = new UltraPopularStateClass();
-					}
 					
 					
 					outputString = CurState.createOutputString(videoName,Operation.ADD_VIDEO);
@@ -83,26 +68,12 @@ public class HelperClass {
 				{
 					videoName = line.split("::")[1];
 					videoCount--;
-					int score = 0;
-					hmap.remove(videoName);
-					if(cc.getCurState().toString().matches("^.*UnpopularState.*$"))
-					{
-						CurState = new UnpopularStateClass();
-					}
-					else if(cc.getCurState().toString().matches("^.*MildlyPopularState.*$"))
-					{
-						CurState = new MildlyPopularStateClass();
-					}
-					else if(cc.getCurState().toString().matches("^.*HighlyPopularState.*$"))
-					{
-						CurState = new HighlyPopularStateClass();
-					}
-					else if(cc.getCurState().toString().matches("^.*UltraPopularState.*$"))
-					{
-						CurState = new UltraPopularStateClass();
-						
-					}
 					
+					int score = 0;
+					
+					//hmap.remove(videoName);
+					
+					cc.removeVideo(hmap, videoName);
 					
 					outputString = CurState.createOutputString(videoName,Operation.ADD_VIDEO);
 					res.store(outputString);
@@ -137,14 +108,16 @@ public class HelperClass {
 							
 							CurState = new UnpopularStateClass();
 							
-							int totalScore = CurState.CalculatePopularityScore(views,likes,dislikes,videoCount);
+							int totalScore = CurState.CalculatePopularityScore(views,likes,dislikes);
 							
 							if(hmap.get(temp) != 0)
 							{
 								totalScore += hmap.get(temp);
 							}
 							
-							hmap.put(temp,totalScore);
+							//hmap.put(temp,totalScore);
+							
+							cc.addVideo(hmap, temp, totalScore);
 							
 							for(int i: hmap.values() )
 							{
@@ -161,14 +134,15 @@ public class HelperClass {
 							
 							
 							CurState = new MildlyPopularStateClass();
-							int totalScore = CurState.CalculatePopularityScore(views,likes,dislikes,videoCount);
+							int totalScore = CurState.CalculatePopularityScore(views,likes,dislikes);
 							
 							if(hmap.get(temp) != 0)
 							{
 								totalScore += hmap.get(temp);
 							}
 							
-							hmap.put(temp,totalScore);
+							//hmap.put(temp,totalScore);
+							cc.addVideo(hmap, temp, totalScore);
 							
 							for(int i: hmap.values() )
 							{
@@ -183,14 +157,15 @@ public class HelperClass {
 							
 							
 							CurState = new HighlyPopularStateClass();
-							int totalScore = CurState.CalculatePopularityScore(views,likes,dislikes,videoCount);
+							int totalScore = CurState.CalculatePopularityScore(views,likes,dislikes);
 							
 							if(hmap.get(temp) != 0)
 							{
 								totalScore += hmap.get(temp);
 							}
 							
-							hmap.put(temp,totalScore);
+							//hmap.put(temp,totalScore);
+							cc.addVideo(hmap, temp, totalScore);
 							
 							for(int i: hmap.values() )
 							{
@@ -205,14 +180,15 @@ public class HelperClass {
 							
 							
 							CurState = new UltraPopularStateClass();
-							int totalScore = CurState.CalculatePopularityScore(views,likes,dislikes,videoCount);
+							int totalScore = CurState.CalculatePopularityScore(views,likes,dislikes);
 							
 							if(hmap.get(temp) != 0)
 							{
 								totalScore += hmap.get(temp);
 							}
 							
-							hmap.put(temp,totalScore);
+							//hmap.put(temp,totalScore);
+							cc.addVideo(hmap, temp, totalScore);
 							
 							for(int i: hmap.values() )
 							{
@@ -243,23 +219,6 @@ public class HelperClass {
 				{
 					String temp=line.replaceAll("^.*__|::.*$","");
 					int len=Integer.parseInt(line.replaceAll("^.*LEN=|$",""));
-					
-					if(cc.getCurState().toString().matches("^.*UnpopularState.*$"))
-					{
-						CurState = new UnpopularStateClass();
-					}
-					else if(cc.getCurState().toString().matches("^.*MildlyPopularState.*$"))
-					{
-						CurState = new MildlyPopularStateClass();
-					}
-					else if(cc.getCurState().toString().matches("^.*HighlyPopularState.*$"))
-					{
-						CurState = new HighlyPopularStateClass();
-					}
-					else if(cc.getCurState().toString().matches("^.*UltraPopularState.*$"))
-					{
-						CurState = new UltraPopularStateClass();	
-					}
 					
 					outputString = CurState.createOutputStringAdRequest(len);
 					res.store(outputString);

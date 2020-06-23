@@ -1,16 +1,16 @@
 package channelpopularity.state;
 
+import java.util.HashMap;
+
 import channelpopularity.operation.Operation;
 
 public abstract class AbstractState implements StateI {
 	
 	public int popularityScore = 0;
 	
-	public int CalculatePopularityScore(int views,int likes,int dislikes,int vCount)
+	public int CalculatePopularityScore(int views,int likes,int dislikes)
 	{
-		//System.out.println("in AbstractState score before is "+popularityScore);
 		popularityScore = (views + 2*(likes-dislikes));
-		//System.out.println("in AbstractState score is "+popularityScore);
 		return popularityScore;
 	}
 	
@@ -35,6 +35,16 @@ public abstract class AbstractState implements StateI {
 		}
 		
 		return updatedState;
+	}
+	
+	public void addVideo(HashMap<String, Integer> hmap, String videoName, int popularity)
+	{
+		hmap.put(videoName,popularity);
+	}
+	
+	public void removeVideo(HashMap<String, Integer> hmap, String videoName)
+	{
+		hmap.remove(videoName);
 	}
 	
 	public abstract String createOutputString(String vName, Operation op);

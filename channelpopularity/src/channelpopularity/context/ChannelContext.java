@@ -11,14 +11,12 @@ public class ChannelContext implements ContextI{
 	
 	public ChannelContext(SimpleStateFactoryI stateFactoryIn, List<StateName> stateNames)
 	{
-		//System.out.println("in context constructor "+stateNames.get(0)+" "StateName);
 		availableStates = new HashMap<StateName, StateI>();
 		availableStates.put(StateName.UNPOPULAR,stateFactoryIn.create(stateNames.get(0)));
 		availableStates.put(StateName.MILDLY_POPULAR,stateFactoryIn.create(stateNames.get(1)));
 		availableStates.put(StateName.HIGHLY_POPULAR,stateFactoryIn.create(stateNames.get(2)));
 		availableStates.put(StateName.ULTRA_POPULAR,stateFactoryIn.create(stateNames.get(3)));
 		curState = availableStates.get(StateName.UNPOPULAR);
-		//System.out.println("in context constructor "+curState);
 	}
 	
 	public void setCurrentState(StateName nextState)
@@ -33,5 +31,11 @@ public class ChannelContext implements ContextI{
 		return curState;
 	}
 	
-
+	public void addVideo(HashMap<String, Integer> hmap, String videoName, int popularity){ curState.addVideo(hmap, videoName, popularity);}
+	
+	public void removeVideo(HashMap<String, Integer> hmap, String videoName){curState.removeVideo(hmap, videoName);}
+	
+	
+	
+	
 }
