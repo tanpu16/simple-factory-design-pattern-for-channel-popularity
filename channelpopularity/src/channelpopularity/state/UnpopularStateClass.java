@@ -4,14 +4,12 @@ import channelpopularity.operation.Operation;
 
 public class UnpopularStateClass extends AbstractState  {
 
-
-	public UnpopularStateClass()
-	{
-		popularityScore = 0;
-	}
-
-
-	
+	/*this method takes 2 parameters, used to create final output string
+	@param vName -- Video name
+	@param videoName - operation performed on video
+	@return String -- final output string needs to store in result class
+	@see just a function which creates respective operation related output string.
+	*/
 	public String createOutputString(String vName, Operation op)
 	{
 		String str = null;
@@ -28,7 +26,12 @@ public class UnpopularStateClass extends AbstractState  {
 		return str;
 	}
 	
-	public String createOutputStringAdRequest(int len)
+	/*this method takes 1 parameter1, used to create final output string for adRequest by checking range
+	@param len -- length of ad in input file
+	@return String -- final output string needs to store in result class
+	@see just a function which creates ad related output string by checking ad length
+	*/
+	public String adRequest(int len)
 	{
 		String str = null;
 		if(len > 1 && len <= 10)
@@ -42,10 +45,16 @@ public class UnpopularStateClass extends AbstractState  {
 		return str;
 	}
 
+	/*this method takes 1 parameter, used to create final output string for metrics
+	@param score -- score of channel popularity
+	@return String -- final output string needs to store in result class
+	@see just a function which creates metrics related output string
+	*/
 	public String createOutputStringMetrics(int score)
 	{
 		String str = StateName.UNPOPULAR.toString()+"__POPULARITY_SCORE_UPDATE::"+score;
 		return str;
 	}
+
 	
 }

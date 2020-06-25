@@ -2,7 +2,6 @@ package channelpopularity.state;
 
 public enum StateName {
 
-	
 	UNPOPULAR(0,1000),
 	MILDLY_POPULAR(1001,10000),
 	HIGHLY_POPULAR(10001,100000),

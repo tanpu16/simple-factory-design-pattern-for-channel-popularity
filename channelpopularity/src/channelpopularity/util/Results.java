@@ -1,14 +1,8 @@
 package channelpopularity.util;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.InvalidPathException;
 
 public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 	String path;
@@ -41,7 +35,7 @@ public class Results implements FileDisplayInterface, StdoutDisplayInterface {
 	
 
 	/*this is generic void method, which write output to output.txt or matrics.txt depends on
-	the instace (WordRotator/MatricsCalculator) used to call this method.
+	the instance (WordRotator/MatricsCalculator) used to call this method.
 	@param NA
 	@return void
 	@see write content of the StringBuffer into the file.

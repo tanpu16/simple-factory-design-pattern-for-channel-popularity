@@ -1,5 +1,6 @@
 package channelpopularity.state.factory;
-import channelpopularity.state.*;
+import channelpopularity.state.StateI;
+import channelpopularity.state.StateName;
 
 public interface SimpleStateFactoryI {
 	

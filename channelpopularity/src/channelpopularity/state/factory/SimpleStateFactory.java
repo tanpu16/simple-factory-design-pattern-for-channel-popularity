@@ -1,9 +1,19 @@
 package channelpopularity.state.factory;
-import channelpopularity.state.*;
+import channelpopularity.state.StateI;
+import channelpopularity.state.HighlyPopularStateClass;
+import channelpopularity.state.MildlyPopularStateClass;
+import channelpopularity.state.UltraPopularStateClass;
+import channelpopularity.state.UnpopularStateClass;
+import channelpopularity.state.StateName;
 
 public class SimpleStateFactory implements SimpleStateFactoryI {
 
 	
+	/*this method takes 1 parameter, used to initialize all states
+	@param stateIn -- input state
+	@return StateI -- initialized state out of 4
+	@see just a function initialized all the states and return null if state does not present
+	*/
 	public StateI create(StateName stateIn)
 	{
 		StateI createState = null;
@@ -24,7 +34,7 @@ public class SimpleStateFactory implements SimpleStateFactoryI {
 		{
 			createState = new UltraPopularStateClass();
 		}	
-		//System.out.println("in create "+createState);
+		
 		return createState;
 	}
 	
